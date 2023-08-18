@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Particles</title>
+<style>
+pt{font-size: 40px;}
+</style>
+</head>
+<body>
+<p>Up quarks: <span id="u">0</span></p>
+<p>Down quarks: <span id="d">0</span></p>
+<script>
+var u = 0;
+setInterval(function(){uq = document.createElement("pt");
+uq.innerText = "u";
+uq.onclick = function(){this.style.display = "none"; u += 1};
+var i = Math.floor(Math.random()*window.innerWidth);
+var j = Math.floor(Math.random()*window.innerHeight);
+uq.style.position = "absolute";
+uq.style.left = i+"px";
+uq.style.top = j+"px";
+document.body.appendChild(uq)}, 1000);
+setInterval(function(){document.getElementById("u").innerText = u}, 10)
+
+var d = 0;
+setInterval(function(){dq = document.createElement("pt");
+dq.innerText = "d";
+dq.onclick = function(){this.style.display = "none"; d += 1};
+var i = Math.floor(Math.random()*window.innerWidth);
+var j = Math.floor(Math.random()*window.innerHeight);
+dq.style.position = "absolute";
+dq.style.left = i+"px";
+dq.style.top = j+"px";
+document.body.appendChild(dq)}, 1000);
+setInterval(function(){document.getElementById("d").innerText = d}, 10)
+</script>
+
+</body>
+</html>
