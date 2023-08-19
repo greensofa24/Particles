@@ -2,15 +2,80 @@
 <html>
 <head>
 <title>Particles</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <style>
-pt{font-size: 40px;}
+pt{font-size: 30px;}
+.reactor{display:none;}
+.upgrade{display:none;}
 </style>
 </head>
 <body>
+<h1>$0</h1>
+
+<button onclick="$('body > :not(pt)').hide();
+$('.reactor').show();">Reactor</button>
+<button onclick="$('body > :not(pt)').hide();
+$('.upgrade').show();">Upgrades</button>
+
+<button class="reactor" onclick="if(u >= 2 && d && money >= 3) {
+p += 1;
+u -= 2;
+d -= 1;
+money -= 3;
+}">2 up quarks, 1 down quark and $3 for a proton</button>
+<button class="reactor" onclick="if(u && d >= 2 && money >= 3) {
+n += 1;
+u -= 1;
+d -= 2;
+money -= 3;
+}">1 up quark, 2 down quarks and $3 for a neutron</button>
+
+<button class="upgrade" onclick="if(p >= 10 && n >= 10 && money >= 50) {
+pn = true;
+}">Unlock proton and neutron spawns (Price: 10p, 10n and $50)</button>
+
+<button class="reactor upgrade" onclick="$('body > :not(script)').show();
+$('.reactor').hide();
+$('.upgrade').hide();">Back</button>
+
 <p>Up quarks: <span id="u">0</span></p>
+<button onclick="if(u) {
+money += 1;
+u -= 1;}">Sell</button>
+
 <p>Down quarks: <span id="d">0</span></p>
+<button onclick="if(d) {
+money += 1;
+d -= 1;}">Sell</button>
+
+<p>Electrons: <span id="e">0</span></p>
+<button onclick="if(e) {
+money += 1;
+e -= 1;}">Sell</button>
+
+<p>Protons: <span id="p">0</span></p>
+<button onclick="if(p) {
+money += 9;
+p -= 1;}">Sell</button>
+
+<p>Neutrons: <span id="n">0</span></p>
+<button onclick="if(n) {
+money += 9;
+n -= 1;}">Sell</button>
+
+<p>Photons: <span id="ph">0</span></p>
+<button onclick="if(ph) {
+money += 1;
+ph -= 1;}">Sell</button>
+
 <script>
+var money = 0;
+setInterval(function(){document.querySelector("h1").innerText = "$" + money}, 10);
+
+var pn = false;
+
 var u = 0;
+
 setInterval(function(){uq = document.createElement("pt");
 uq.innerText = "u";
 uq.onclick = function(){this.style.display = "none"; u += 1};
@@ -19,10 +84,12 @@ var j = Math.floor(Math.random()*window.innerHeight);
 uq.style.position = "absolute";
 uq.style.left = i+"px";
 uq.style.top = j+"px";
-document.body.appendChild(uq)}, 1000);
-setInterval(function(){document.getElementById("u").innerText = u}, 10)
+document.body.appendChild(uq)}, 3000);
+
+setInterval(function(){document.getElementById("u").innerText = u}, 10);
 
 var d = 0;
+
 setInterval(function(){dq = document.createElement("pt");
 dq.innerText = "d";
 dq.onclick = function(){this.style.display = "none"; d += 1};
@@ -31,9 +98,80 @@ var j = Math.floor(Math.random()*window.innerHeight);
 dq.style.position = "absolute";
 dq.style.left = i+"px";
 dq.style.top = j+"px";
-document.body.appendChild(dq)}, 1000);
-setInterval(function(){document.getElementById("d").innerText = d}, 10)
+document.body.appendChild(dq)}, 3000);
+
+setInterval(function(){document.getElementById("d").innerText = d}, 10);
+
+var e = 0;
+
+setInterval(function(){eq = document.createElement("pt");
+eq.innerText = "e";
+eq.onclick = function(){this.style.display = "none"; e += 1};
+var i = Math.floor(Math.random()*window.innerWidth);
+var j = Math.floor(Math.random()*window.innerHeight);
+eq.style.position = "absolute";
+eq.style.left = i+"px";
+eq.style.top = j+"px";
+document.body.appendChild(eq)}, 3000);
+
+setInterval(function(){document.getElementById("e").innerText = e}, 10);
+
+var p = 0;
+
+setInterval(function(){if(pn) {pq = document.createElement("pt");
+pq.innerText = "p";
+pq.onclick = function(){this.style.display = "none"; p += 1};
+var i = Math.floor(Math.random()*window.innerWidth);
+var j = Math.floor(Math.random()*window.innerHeight);
+pq.style.position = "absolute";
+pq.style.left = i+"px";
+pq.style.top = j+"px";
+document.body.appendChild(pq)}}, 15000);
+
+setInterval(function(){document.getElementById("p").innerText = p}, 10);
+
+var n = 0;
+
+setInterval(function(){if(pn) {nq = document.createElement("pt");
+nq.innerText = "n";
+nq.onclick = function(){this.style.display = "none"; n += 1};
+var i = Math.floor(Math.random()*window.innerWidth);
+var j = Math.floor(Math.random()*window.innerHeight);
+nq.style.position = "absolute";
+nq.style.left = i+"px";
+nq.style.top = j+"px";
+document.body.appendChild(nq)}}, 15000);
+
+setInterval(function(){document.getElementById("n").innerText = n}, 10);
+
+function cheat() {
+let code = prompt("Enter your cheat code", "");
+if (code == "JustSpawnAlready") {
+pn = true;
+}
+}
 </script>
+
+<br><br>
+<button onclick="cheat()">Cheat code</button>
+<br><br>
+<button onclick="var text = money + '/' + u + '/' + d + '/' + e + '/' + p + '/' + n + '/' + pn;
+document.querySelector('input').value = btoa(btoa(text));">Export</button>
+<input>
+<br>
+<button onclick="var value = atob(atob(document.querySelectorAll('input')[1].value)).split('/');
+money = parseInt(value[0]);
+u = parseInt(value[1]);
+d = parseInt(value[2]);
+e = parseInt(value[3]);
+p = parseInt(value[4]);
+n = parseInt(value[5]);
+if(value[6] == 'true') {
+pn = true;
+} else {
+pn = false;
+}">Import</button>
+<input>
 
 </body>
 </html>
