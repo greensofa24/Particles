@@ -31,6 +31,9 @@ money -= 3;
 }">1 up quark, 2 down quarks and $3 for a neutron</button>
 
 <button class="upgrade" onclick="if(p >= 10 && n >= 10 && money >= 50) {
+p -= 10;
+n -= 10;
+money -= 50;
 pn = true;
 }">Unlock proton and neutron spawns (Price: 10p, 10n and $50)</button>
 
@@ -41,32 +44,38 @@ $('.upgrade').hide();">Back</button>
 <p>Up quarks: <span id="u">0</span></p>
 <button onclick="if(u) {
 money += 1;
-u -= 1;}">Sell</button>
+u -= 1;
+}">Sell</button>
 
 <p>Down quarks: <span id="d">0</span></p>
 <button onclick="if(d) {
 money += 1;
-d -= 1;}">Sell</button>
+d -= 1;
+}">Sell</button>
 
 <p>Electrons: <span id="e">0</span></p>
 <button onclick="if(e) {
 money += 1;
-e -= 1;}">Sell</button>
+e -= 1;
+}">Sell</button>
 
 <p>Protons: <span id="p">0</span></p>
 <button onclick="if(p) {
 money += 9;
-p -= 1;}">Sell</button>
+p -= 1;
+}">Sell</button>
 
 <p>Neutrons: <span id="n">0</span></p>
 <button onclick="if(n) {
 money += 9;
-n -= 1;}">Sell</button>
+n -= 1;
+}">Sell</button>
 
 <p>Photons: <span id="ph">0</span></p>
 <button onclick="if(ph) {
 money += 1;
-ph -= 1;}">Sell</button>
+ph -= 1;
+}">Sell</button>
 
 <script>
 var money = 0;
