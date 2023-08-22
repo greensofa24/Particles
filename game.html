@@ -16,12 +16,6 @@ pt{font-size: 30px;}
 $('.reactor').show();">Reactor</button>
 <button onclick="$('body > :not(pt)').hide();
 $('.upgrade').show();">Upgrades</button>
-<button onclick="$('pt').hide();
-u += $('.u:visible').length;
-d += $('.d:visible').length;
-e += $('.e:visible').length;
-p += $('.p:visible').length;
-n += $('.n:visible').length;">Clear all particles (and get a rounded down fraction)</button>
 
 <button class="reactor" onclick="if(u >= 2 && d && money >= 3) {
 p += 1;
@@ -89,83 +83,89 @@ ph -= 1;
 }">Sell</button>
 
 <script>
+var pn = false;
+var c = 0;
+
 var money = 0;
 setInterval(function(){document.querySelector("h1").innerText = "$" + money}, 10);
 
-var pn = false;
-
 var u = 0;
 
-setInterval(function(){up = document.createElement("pt");
+setInterval(function(){if(c <= 30) {up = document.createElement("pt");
 up.innerText = "u";
-up.onclick = function(){this.style.display = "none"; u += 1;};
+up.onclick = function(){this.style.display = "none"; u += 1; c -= 1};
 var i = Math.floor(Math.random()*window.innerWidth);
 var j = Math.floor(Math.random()*$(document).height());
 up.style.position = "absolute";
 up.style.left = i+"px";
 up.style.top = j+"px";
 up.className = "u";
-document.body.appendChild(up)}, 3000);
+c += 1;
+document.body.appendChild(up)}}, 3000);
 
 setInterval(function(){document.getElementById("u").innerText = u}, 10);
 
 var d = 0;
 
-setInterval(function(){dp = document.createElement("pt");
+setInterval(function(){if(c <= 30) {dp = document.createElement("pt");
 dp.innerText = "d";
-dp.onclick = function(){this.style.display = "none"; d += 1};
+dp.onclick = function(){this.style.display = "none"; d += 1; c -= 1};
 var i = Math.floor(Math.random()*window.innerWidth);
 var j = Math.floor(Math.random()*$(document).height());
 dp.style.position = "absolute";
 dp.style.left = i+"px";
 dp.style.top = j+"px";
 dp.className = "d";
-document.body.appendChild(dp)}, 3000);
+c += 1;
+document.body.appendChild(dp)}}, 3000);
 
 setInterval(function(){document.getElementById("d").innerText = d}, 10);
 
 var e = 0;
 
-setInterval(function(){ep = document.createElement("pt");
+setInterval(function(){if(c <= 30) {ep = document.createElement("pt");
 ep.innerText = "e";
-ep.onclick = function(){this.style.display = "none"; e += 1};
+ep.onclick = function(){this.style.display = "none"; e += 1; c -= 1};
 var i = Math.floor(Math.random()*window.innerWidth);
 var j = Math.floor(Math.random()*$(document).height());
 ep.style.position = "absolute";
 ep.style.left = i+"px";
 ep.style.top = j+"px";
 ep.className = "e";
-document.body.appendChild(ep)}, 3000);
+c += 1;
+document.body.appendChild(ep)}}, 3000);
 
 setInterval(function(){document.getElementById("e").innerText = e}, 10);
 
 var p = 0;
 
-setInterval(function(){if(pn) {pp = document.createElement("pt");
+setInterval(function(){if(c <= 30) {if(pn) {pp = document.createElement("pt");
 pp.innerText = "p";
-pp.onclick = function(){this.style.display = "none"; p += 1};
+pp.onclick = function(){this.style.display = "none"; p += 1; c -= 1};
 var i = Math.floor(Math.random()*window.innerWidth);
 var j = Math.floor(Math.random()*$(document).height());
 pp.style.position = "absolute";
 pp.style.left = i+"px";
 pp.style.top = j+"px";
 pp.className = "p";
-document.body.appendChild(pp)}}, 15000);
+c += 1;
+document.body.appendChild(pp)}}}, 15000);
 
 setInterval(function(){document.getElementById("p").innerText = p}, 10);
 
 var n = 0;
 
-setInterval(function(){if(pn) {np = document.createElement("pt");
+setInterval(function(){if(c <= 30) {if(pn) {np = document.createElement("pt");
 np.innerText = "n";
-np.onclick = function(){this.style.display = "none"; n += 1};
+np.onclick = function(){this.style.display = "none"; n += 1; c -= 1};
 var i = Math.floor(Math.random()*window.innerWidth);
 var j = Math.floor(Math.random()*$(document).height());
 np.style.position = "absolute";
 np.style.left = i+"px";
 np.style.top = j+"px";
 np.className = "n";
-document.body.appendChild(np)}}, 15000);
+c += 1;
+document.body.appendChild(np)}}}, 15000);
 
 setInterval(function(){document.getElementById("n").innerText = n}, 10);
 
