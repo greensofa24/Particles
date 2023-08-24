@@ -4,10 +4,26 @@
 <title>Particles</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <style>
-pt{font-size: 30px;}
-.reactor{display:none;}
-.collider{display:none;}
-.upgrade{display:none;}
+pt{
+font-size: 30px;
+}
+.reactor {
+display:none;
+}
+.collider {
+display:none;
+}
+.upgrade {
+display:none;
+}
+body {
+font-family: 'Comic Sans MS', 'Comic Sans';
+font-size: 90%
+}
+button {
+font-family: inherit;
+font-size: 87.5%;
+}
 </style>
 </head>
 <body>
@@ -17,6 +33,14 @@ pt{font-size: 30px;}
 $('.reactor').show();">Reactor</button>
 <button onclick="$('body > :not(pt)').hide();
 $('.upgrade').show();">Upgrades</button>
+<button onclick="if (cu) {
+$('body > :not(pt)').hide();
+$('.collider').show();
+} else if (money >= 200) {
+cu = true;
+money -= 200;
+this.innerText = 'Collider';
+}">Collider (Unlock for $200)</button>
 
 <button class="reactor" onclick="if(u >= 2 && d && money >= 3) {
 p += 1;
@@ -30,29 +54,25 @@ u -= 1;
 d -= 2;
 money -= 3;
 }">1 up quark, 2 down quarks and $3 for a neutron</button>
-<button class="reactor" onclick="//if(p >= 50 && n >= 50 && money >= 500) {
-//e -= 50;
-//p -= 50;
-//n -= 50;
-//money -= 50;
-$('#collider').addClass('reactor');
-$('#collider').show();
-//}">Unlock Collider (Price: 50e, 50p, 50n and $500)</button>
-<button style="display:none" id="collider" onclick="$('body > :not(pt)').hide();
-$('.collider').show();
-}">Collider</button>
+<button class="reactor" onclick="if(e && p && money >= 10) {
+h1 += 1;
+e -= 1;
+p -= 1;
+money -= 10;
+}">1 electron, 1 proton and $10 for a protium atom</button>
 
-<button>Insert </button>
+<button class="collider" onclick="">1 protium atom, 1 deuterium atom and $300 for 1 helium-3 atom and 1 photon</button>
 
-<button class="upgrade" onclick="if(p >= 10 && n >= 10 && money >= 50) {
-p -= 10;
-n -= 10;
+<button class="upgrade" onclick="if(p >= 5 && n >= 5 && money >= 50) {
+p -= 5;
+n -= 5;
 money -= 50;
 pn = true;
-}">Unlock proton and neutron spawns (Price: 10p, 10n and $50)</button>
+}">Unlock proton and neutron spawns (Price: 5p, 5n and $50)</button>
 
-<button class="reactor upgrade" onclick="$('body > :not(script)').show();
+<button class="reactor upgrade collider" onclick="$('body > :not(script):not(pt:hidden)').show();
 $('.reactor').hide();
+$('.collider').hide();
 $('.upgrade').hide();">Back</button>
 
 <p>Up quarks: <span id="u">0</span></p>
@@ -85,6 +105,12 @@ money += 8;
 n -= 1;
 }">Sell</button>
 
+<p>Protium atoms: <span id="h1">0</span></p>
+<button onclick="if(h1) {
+money += 30;
+h1 -= 1;
+}">Sell</button>
+
 <p>Photons: <span id="ph">0</span></p>
 <button onclick="if(ph) {
 money += 1;
@@ -93,10 +119,14 @@ ph -= 1;
 
 <script>
 var pn = false;
+//collider unlocked?
+var cu = false;
 var ph = 0;
 setInterval(function(){document.getElementById("ph").innerText = ph}, 10);
+var h1 = 0;
+setInterval(function(){document.getElementById("h1").innerText = h1}, 10);
 var c = 0;
-var ca = 3;
+var ca = 30;
 
 var money = 0;
 setInterval(function(){document.querySelector("h1").innerText = "$" + money}, 10);
@@ -213,7 +243,7 @@ prompt("You are an idiot ha ha ha ha ha", "I know")
 <br><br>
 <button onclick="cheat()">Cheat code</button>
 <br><br>
-<button onclick="var text = money + '/' + u + '/' + d + '/' + e + '/' + p + '/' + n + '/' + pn;
+<button onclick="var text = money + '/' + u + '/' + d + '/' + e + '/' + p + '/' + n + '/' + pn + '/' + h1 + '/' + ph + '/' + ca + '/' + cu;
 document.querySelector('input').value = btoa(btoa(text));">Export</button>
 <input>
 <br>
@@ -228,6 +258,14 @@ if(value[6] == 'true') {
 pn = true;
 } else {
 pn = false;
+}
+h1 = parseInt(value[7]);
+ph = parseInt(value[8]);
+ca = parseInt(value[9]);
+if(value[10] == 'true') {
+ca = true;
+} else {
+ca = false;
 }">Import</button>
 <input>
 
