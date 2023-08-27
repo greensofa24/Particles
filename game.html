@@ -116,7 +116,7 @@ grs = setInterval(function() {grt -= 1; gr.innerText = grt + 's'}, 1000);
 setTimeout(function() {clearInterval(grs); gr.remove(); $('.research')[0].innerText = 'Gluons discovered!'}, 30000);
 //}">Unlock gluons (Cost: 20p, 20n and $650)</button>
 
-<button class="research" onclick="//if(p >= 20 && n >= 20 && money >= 650) {
+<!--<button class="research" onclick="//if(p >= 20 && n >= 20 && money >= 650) {
 p -= 20;
 n -= 20;
 money -= 650;
@@ -128,7 +128,7 @@ this.disabled = true;
 $('body').append(gr);
 grs = setInterval(function() {grt -= 1; gr.innerText = grt + 's'}, 1000);
 setTimeout(function() {clearInterval(grs); gr.remove(); $('.research')[0].innerText = 'Gluons discovered!'}, 30000);
-//}">Extract gluons</button>
+//}">Extract gluons</button>-->
 
 <button class="reactor upgrade collider research" onclick="$('body > :not(script)').show();
 $('.reactor').hide();
@@ -230,7 +230,7 @@ setInterval(function(){document.getElementById("en").innerText = en}, 10);
 var c = 0;
 var ca = 30;
 
-var money = 2150;
+var money = 0;
 setInterval(function(){document.querySelector("h1").innerText = "$" + money}, 10);
 
 var u = 0;
@@ -278,7 +278,7 @@ $('body').append(ep)}}, 3000);
 
 setInterval(function(){document.getElementById("e").innerText = e}, 10);
 
-var p = 20;
+var p = 0;
 
 setInterval(function(){if(c < ca) {if(pn) {pp = document.createElement("pt");
 pp.innerText = "p";
@@ -293,7 +293,7 @@ $('body').append(pp)}}}, 15000);
 
 setInterval(function(){document.getElementById("p").innerText = p}, 10);
 
-var n = 20;
+var n = 0;
 
 setInterval(function(){if(c < ca) {if(pn) {np = document.createElement("pt");
 np.innerText = "n";
