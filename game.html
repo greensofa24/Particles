@@ -7,13 +7,13 @@
 pt{
 font-size: 30px;
 }
-.reactor {
-display: none;
-}
 .collider {
 display: none;
 }
 .upgrade {
+display: none;
+}
+.reactor {
 display: none;
 }
 .research {
@@ -33,17 +33,17 @@ font-size: 87.5%;
 <h1>$0</h1>
 
 <button onclick="$('body > :not(pt)').hide();
-$('.reactor').show();">Reactor</button>
+$('.collider').show();">Collider</button>
 <button onclick="$('body > :not(pt)').hide();
 $('.upgrade').show();">Upgrades</button>
 <button onclick="if (cu) {
 $('body > :not(pt)').hide();
-$('.collider').show();
+$('.reactor').show();
 } else if (money >= 200) {
 cu = true;
 money -= 200;
-this.innerText = 'Collider';
-}">Collider (Unlock for $200)</button>
+this.innerText = 'Reactor';
+}">Reactor (Unlock for $200)</button>
 <button onclick="if (ru) {
 $('body > :not(pt)').hide();
 $('.research').show();
@@ -59,34 +59,53 @@ e += Math.floor($('pt:contains(e)').length / 5);
 p += Math.floor($('pt:contains(p)').length / 5);
 n += Math.floor($('pt:contains(n)').length / 5);
 $('pt').remove();">Clear all particles and get a (rounded down) fifth</button>
+<br>
+<button id="ep"  onclick="this.disabled = true;
+$('#b').prop('disabled', false);
+$('#a').prop('disabled', false);
+$('#epe').show();
+$('#be').hide();
+$('#ate').hide();" disabled>Elementary particles</button>
+<button id="b" onclick="this.disabled = true;
+$('#ep').prop('disabled', false);
+$('#a').prop('disabled', false);
+$('#be').show();
+$('#epe').hide();
+$('#ate').hide();">Baryons</button>
+<button id="a" onclick="this.disabled = true;
+$('#ep').prop('disabled', false);
+$('#b').prop('disabled', false);
+$('#ate').show();
+$('#epe').hide();
+$('#be').hide();">Atoms</button>
 
-<button class="reactor" onclick="if(u >= 2 && d && money >= 3) {
+<button class="collider" onclick="if(u >= 2 && d && money >= 3) {
 p += 1;
 u -= 2;
 d -= 1;
 money -= 3;
 }">2 up quarks, 1 down quark and $3 for a proton</button>
-<button class="reactor" onclick="if(u && d >= 2 && money >= 3) {
+<button class="collider" onclick="if(u && d >= 2 && money >= 3) {
 n += 1;
 u -= 1;
 d -= 2;
 money -= 3;
 }">1 up quark, 2 down quarks and $3 for a neutron</button>
-<button class="reactor" onclick="if(e && p && money >= 10) {
+<button class="collider" onclick="if(e && p && money >= 10) {
 h1 += 1;
 e -= 1;
 p -= 1;
 money -= 10;
 }">1 electron, 1 proton and $10 for a protium atom</button>
 
-<button class="collider" onclick="if(h1 >= 2 && money >= 150) {
+<button class="reactor" onclick="if(h1 >= 2 && money >= 150) {
 h2 += 1;
 ae += 1;
 en += 1;
 h1 -= 2;
 money -= 30;
 }">2 protium atoms and $150 for 1 deuterium atom, 1 positron and 1 electron neutrino</button>
-<button class="collider" onclick="if(h1 && h2 && money >= 325) {
+<button class="reactor" onclick="if(h1 && h2 && money >= 325) {
 he3 += 1;
 ph += 1;
 h1 -= 1;
@@ -129,12 +148,13 @@ g += Math.floor(Math.random() * 18) + 3;
 n -= 1;
 }">Extract gluons from a neutron (get some gluons, 1 up quark and 2 down quarks)</button>
 
-<button class="reactor upgrade collider research" onclick="$('body > :not(script)').show();
-$('.reactor').hide();
+<button class="collider upgrade reactor research" onclick="$('body > :not(script)').show();
 $('.collider').hide();
 $('.upgrade').hide();
+$('.reactor').hide();
 $('.research').hide();">Back</button>
 
+<div id="epe">
 <p>Up quarks: <span id="u">0</span></p>
 <button onclick="if(u) {
 money += 1;
@@ -159,30 +179,6 @@ money += 3;
 g -= 1;
 }">Sell</button>
 
-<p>Protons: <span id="p">0</span></p>
-<button onclick="if(p) {
-money += 8;
-p -= 1;
-}">Sell</button>
-
-<p>Neutrons: <span id="n">0</span></p>
-<button onclick="if(n) {
-money += 8;
-n -= 1;
-}">Sell</button>
-
-<p>Protium atoms: <span id="h1">0</span></p>
-<button onclick="if(h1) {
-money += 30;
-h1 -= 1;
-}">Sell</button>
-
-<p>Deuterium atoms: <span id="h2">0</span></p>
-<button onclick="if(h2) {
-money += 75;
-h2 -= 1;
-}">Sell</button>
-
 <p>Positrons: <span id="ae">0</span></p>
 <button onclick="if(ae) {
 money += 100;
@@ -195,23 +191,52 @@ money += 25;
 en -= 1;
 }">Sell</button>
 
-<p>Helium-3 atoms: <span id="he3">0</span></p>
-<button onclick="if(he3) {
-money += 150;
-he3 -= 1;
-}">Sell</button>
-
 <p>Photons: <span id="ph">0</span></p>
 <button onclick="if(ph) {
 money += 375;
 ph -= 1;
 }">Sell</button>
+</div>
+
+<div id="be" hidden>
+<p>Protons: <span id="p">0</span></p>
+<button onclick="if(p) {
+money += 8;
+p -= 1;
+}">Sell</button>
+
+<p>Neutrons: <span id="n">0</span></p>
+<button onclick="if(n) {
+money += 8;
+n -= 1;
+}">Sell</button>
+</div>
+
+<div id="ate" hidden>
+<p>Protium atoms: <span id="h1">0</span></p>
+<button onclick="if(h1) {
+money += 30;
+h1 -= 1;
+}">Sell</button>
+
+<p>Deuterium atoms: <span id="h2">0</span></p>
+<button onclick="if(h2) {
+money += 75;
+h2 -= 1;
+}">Sell</button>
 
 <p>Helium-3 atoms: <span id="he3">0</span></p>
 <button onclick="if(he3) {
 money += 150;
 he3 -= 1;
 }">Sell</button>
+
+<p>Helium-4 atoms: <span id="he4">0</span></p>
+<button onclick="if(he4) {
+money += 150;
+he4 -= 1;
+}">Sell</button>
+<div>
 
 <script>
 //proton & neutron spawns unlocked? 0 = false
@@ -230,6 +255,20 @@ var h2 = 0;
 setInterval(function(){document.getElementById("h2").innerText = h2}, 10);
 var he3 = 0;
 setInterval(function(){document.getElementById("he3").innerText = he3}, 10);
+var he4 = 0;
+setInterval(function(){document.getElementById("li7").innerText = li7}, 10);
+var be7 = 0;
+setInterval(function(){document.getElementById("he4").innerText = he4}, 10);
+var li7 = 0;
+setInterval(function(){document.getElementById("be7").innerText = be7}, 10);
+var be7 = 0;
+setInterval(function(){document.getElementById("be7").innerText = be7}, 10);
+var b8 = 0;
+setInterval(function(){document.getElementById("b8").innerText = b8}, 10);
+var be8 = 0;
+setInterval(function(){document.getElementById("be8").innerText = be8}, 10)
+var c12 = 0;
+setInterval(function(){document.getElementById("c12").innerText = c12}, 10);
 //anti-electron
 var ae = 0;
 setInterval(function(){document.getElementById("ae").innerText = ae}, 10);
