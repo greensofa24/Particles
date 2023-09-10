@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
 <title>Particles</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<head>
 <style>
 pt{
 font-size: 30px;
@@ -62,55 +62,52 @@ $('pt').remove();">Clear all particles and get a (rounded down) fifth</button>
 <br>
 <button id="ep"  onclick="this.disabled = true;
 $('#b').prop('disabled', false);
+$('#m').prop('disabled', false);
 $('#a').prop('disabled', false);
 $('#epe').show();
 $('#be').hide();
+$('#me').hide();
 $('#ate').hide();" disabled>Elementary particles</button>
 <button id="b" onclick="this.disabled = true;
 $('#ep').prop('disabled', false);
+$('#m').prop('disabled', false);
 $('#a').prop('disabled', false);
 $('#be').show();
 $('#epe').hide();
+$('#me').hide();
 $('#ate').hide();">Baryons</button>
+<button id="m" onclick="this.disabled = true;
+$('#ep').prop('disabled', false);
+$('#b').prop('disabled', false);
+$('#a').prop('disabled', false);
+$('#me').show();
+$('#be').hide();
+$('#epe').hide();
+$('#ate').hide();">Mesons</button>
 <button id="a" onclick="this.disabled = true;
 $('#ep').prop('disabled', false);
 $('#b').prop('disabled', false);
+$('#m').prop('disabled', false);
 $('#ate').show();
 $('#epe').hide();
-$('#be').hide();">Atoms</button>
+$('#be').hide();
+$('#me').hide();">Atoms</button>
 
 <button class="collider" onclick="if(u >= 2 && d && money >= 3) {
-p += 1;
-u -= 2;
-d -= 1;
-money -= 3;
+timer(1, null, true, this, function(){p += 1; u -= 2; d -= 1; money -= 3});
 }">2 up quarks, 1 down quark and $3 for a proton</button>
 <button class="collider" onclick="if(u && d >= 2 && money >= 3) {
-n += 1;
-u -= 1;
-d -= 2;
-money -= 3;
+timer(1, null, true, this, function(){n += 1; u -= 1; d -= 2; money -= 3});
 }">1 up quark, 2 down quarks and $3 for a neutron</button>
 <button class="collider" onclick="if(e && p && money >= 10) {
-h1 += 1;
-e -= 1;
-p -= 1;
-money -= 10;
+timer(2, null, true, this, function(){h1 += 1; e -= 1; p -= 1; money -= 10});
 }">1 electron, 1 proton and $10 for a protium atom</button>
 
 <button class="reactor" onclick="if(h1 >= 2 && money >= 150) {
-h2 += 1;
-ae += 1;
-en += 1;
-h1 -= 2;
-money -= 30;
+timer(5, null, true, this, function(){h2 += 1; ae += 1; en += 1; h1 -= 2; money -= 30});
 }">2 protium atoms and $150 for 1 deuterium atom, 1 positron and 1 electron neutrino</button>
 <button class="reactor" onclick="if(h1 && h2 && money >= 325) {
-he3 += 1;
-ph += 1;
-h1 -= 1;
-h2 -= 1;
-money -= 325;
+timer(10, null, true, this, function(){he3 += 1; ph += 1; h1 -= 1; h2 -= 1; money -= 325});
 }">1 protium atom, 1 deuterium atom and $300 for 1 helium-3 atom and 1 photon</button>
 
 <button class="upgrade" onclick="if(p >= 5 && n >= 5 && money >= 50) {
@@ -132,21 +129,21 @@ this.innerText = 'Just wait';
 this.disabled = true;
 $('body').append(gr);
 grs = setInterval(function() {grt -= 1; gr.innerText = grt + 's'}, 1000);
-setTimeout(function() {clearInterval(grs); gr.remove(); $('.research')[0].innerText = 'Gluons discovered!'}, 30000);
-}">Unlock gluons (Cost: 20p, 20n and $650)</button>
+setTimeout(function() {clearInterval(grs); gr.remove(); $('.research')[0].innerText = 'Gluons discovered!'; gu = 1; $('.research')[2].innerText = 'Extract gluons from a proton (get some gluons, 2 up quarks and 1 down quark)'; $('.research')[3].innerText = 'Extract gluons from a neutron (get some gluons, 1 up quark and 2 down quarks)'}, 30000);
+}">Unlock ??? (Cost: 20p, 20n and $650)</button>
 <br class="research">
 <button class="research" onclick="if(p) {
 u += 2;
 d += 1;
 g += Math.floor(Math.random() * 18) + 3;
 p -= 1;
-}">Extract gluons from a proton (get some gluons, 2 up quarks and 1 down quark)</button>
+}">???</button>
 <button class="research" onclick="if(p) {
 u += 1;
 d += 2;
 g += Math.floor(Math.random() * 18) + 3;
 n -= 1;
-}">Extract gluons from a neutron (get some gluons, 1 up quark and 2 down quarks)</button>
+}">???</button>
 
 <button class="collider upgrade reactor research" onclick="$('body > :not(script)').show();
 $('.collider').hide();
@@ -212,6 +209,20 @@ n -= 1;
 }">Sell</button>
 </div>
 
+<div id="me" hidden>
+<!--<p>Protons: <span id="p">0</span></p>
+<button onclick="if(p) {
+money += 8;
+p -= 1;
+}">Sell</button>
+
+<p>Neutrons: <span id="n">0</span></p>
+<button onclick="if(n) {
+money += 8;
+n -= 1;
+}">Sell</button>-->
+</div>
+
 <div id="ate" hidden>
 <p>Protium atoms: <span id="h1">0</span></p>
 <button onclick="if(h1) {
@@ -236,16 +247,48 @@ he3 -= 1;
 money += 150;
 he4 -= 1;
 }">Sell</button>
-<div>
+
+<p>Beryllium-7 atoms: <span id="be7">0</span></p>
+<button onclick="if(be7) {
+money += 30;
+be7 -= 1;
+}">Sell</button>
+
+<p>Lithium-7 atoms: <span id="li7">0</span></p>
+<button onclick="if(li7) {
+money += 75;
+li7 -= 1;
+}">Sell</button>
+
+<p>Boron-8 atoms: <span id="b8">0</span></p>
+<button onclick="if(b8) {
+money += 150;
+b8 -= 1;
+}">Sell</button>
+
+<p>Beryllium-8 atoms: <span id="be8">0</span></p>
+<button onclick="if(be8) {
+money += 150;
+be8 -= 1;
+}">Sell</button>
+
+<p>Carbon-12 atoms: <span id="c12">0</span></p>
+<button onclick="if(c12) {
+money += 150;
+c12 -= 1;
+}">Sell</button>
+</div>
 
 <script>
 //proton & neutron spawns unlocked? 0 = false
 var pn = 0;
 //collider unlocked? 0 = false
 var cu = 0;
-//research unlocked? 0 = false
+//research unlocked?
 var ru = 0;
 var g = 0;
+// gluons unlocked?
+var gu = 0;
 setInterval(function(){document.getElementById("g").innerText = g}, 10);
 var ph = 0;
 setInterval(function(){document.getElementById("ph").innerText = ph}, 10);
@@ -256,7 +299,7 @@ setInterval(function(){document.getElementById("h2").innerText = h2}, 10);
 var he3 = 0;
 setInterval(function(){document.getElementById("he3").innerText = he3}, 10);
 var he4 = 0;
-  setInterval(function(){document.getElementById("he4").innerText = he4}, 10);
+setInterval(function(){document.getElementById("he4").innerText = he4}, 10);
 var be7 = 0;
 setInterval(function(){document.getElementById("be7").innerText = be7}, 10);
 var li7 = 0;
@@ -367,26 +410,34 @@ e = parseInt(prompt("How many electrons do you want", ""));
 p = parseInt(prompt("How many protons do you want", ""));
 n = parseInt(prompt("How many neutrons do you want", ""));
 ph = parseInt(prompt("How many photons do you want", ""));
-/*pn = prompt("Do you want proton and neutron spawns y/n", "")
-if (pn == "y") {
-pn = true;
-} else {
-pn = false;
-}
-ca = prompt("Do you want to remove particle spawn cap y/n", "")
+pn = prompt("Do you want proton and neutron spawns true/false", "")
+/*ca = prompt("Do you want to remove particle spawn cap", "")
 if (ca == "y") {
 ca = Infinity;
 }*/
 } else {
-prompt("Invalid", "I know")
+prompt("Invalid", "Ok")
 }
 }
+
+/*function timer(time, text, enable, object, after) {
+c = document.createElement('p');
+t = time;
+c.innerText = t + "s";
+o = object.innerText;
+object.innerText = 'Just wait';
+object.disabled = true;
+//c.addClass(object.classList[0]);
+$('body').append(c);
+s = setInterval(function() {t -= 1; c.innerText = t + "s"}, 1000);
+setTimeout(function() {clearInterval(s); c.remove(); object.innerText = text ||o; object.disabled = !enable; after()}, time * 1000);
+}*/
 </script>
 
 <br><br>
 <button onclick="cheat()">Cheat code</button>
 <br><br>
-<button onclick="var text = money + '/' + u + '/' + d + '/' + e + '/' + p + '/' + n + '/' + h1 + '/' + h2 + '/' + he3 + '/' + ph + '/' + pn + '/' + ca + '/' + cu + '/' + ru + '/' + g;
+<button onclick="var text = money + '/' + u + '/' + d + '/' + e + '/' + p + '/' + n + '/' + h1 + '/' + h2 + '/' + he3 + '/' + ph + '/' + pn + '/' + ca + '/' + cu + '/' + ru + '/' + g + '/' + gu + '/' + he4 + '/' + be7 + '/' + li7 + '/' + b8 + '/' + be8 + '/' + c12;
 document.querySelector('input').value = btoa(btoa(text));">Export</button>
 <input>
 <br>
@@ -405,7 +456,14 @@ pn = parseInt(value[10]) || pn;
 ca = parseInt(value[11]) || ca;
 cu = parseInt(value[12]) || cu;
 ru = parseInt(value[13]) || ru;
-g = parseInt(value[14]) || g;">Import</button>
+g = parseInt(value[14]) || g;
+gu = parseInt(value[15]) || gu;
+he4 = parseInt(value[16]) || he4;
+be7 = parseInt(value[17]) || be7;
+li7 = parseInt(value[18]) || li7;
+b8 = parseInt(value[19]) || b8;
+be8 = parseInt(value[20]) || be8;
+c12 = parseInt(value[21]) || c12;">Import</button>
 <input>
 
 </body>
