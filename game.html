@@ -94,20 +94,37 @@ $('#be').hide();
 $('#me').hide();">Atoms</button>
 
 <button class="collider" onclick="if(u >= 2 && d && money >= 3) {
-timer(1, null, true, this, function(){p += 1; u -= 2; d -= 1; money -= 3});
+p += 1;
+u -= 2;
+d -= 1;
+money -= 3;
 }">2 up quarks, 1 down quark and $3 for a proton</button>
 <button class="collider" onclick="if(u && d >= 2 && money >= 3) {
-timer(1, null, true, this, function(){n += 1; u -= 1; d -= 2; money -= 3});
+n += 1;
+u -= 1;
+d -= 2;
+money -= 3;
 }">1 up quark, 2 down quarks and $3 for a neutron</button>
 <button class="collider" onclick="if(e && p && money >= 10) {
-timer(2, null, true, this, function(){h1 += 1; e -= 1; p -= 1; money -= 10});
+h1 += 1;
+e -= 1;
+p -= 1;
+money -= 10;
 }">1 electron, 1 proton and $10 for a protium atom</button>
 
 <button class="reactor" onclick="if(h1 >= 2 && money >= 150) {
-timer(5, null, true, this, function(){h2 += 1; ae += 1; en += 1; h1 -= 2; money -= 30});
+h2 += 1;
+ae += 1;
+en += 1;
+h1 -= 2;
+money -= 30;
 }">2 protium atoms and $150 for 1 deuterium atom, 1 positron and 1 electron neutrino</button>
 <button class="reactor" onclick="if(h1 && h2 && money >= 325) {
-timer(10, null, true, this, function(){he3 += 1; ph += 1; h1 -= 1; h2 -= 1; money -= 325});
+he3 += 1;
+ph += 1;
+h1 -= 1;
+h2 -= 1;
+money -= 325;
 }">1 protium atom, 1 deuterium atom and $300 for 1 helium-3 atom and 1 photon</button>
 
 <button class="upgrade" onclick="if(p >= 5 && n >= 5 && money >= 50) {
