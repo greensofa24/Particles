@@ -126,6 +126,25 @@ h1 -= 1;
 h2 -= 1;
 money -= 325;
 }">1 protium atom, 1 deuterium atom and $300 for 1 helium-3 atom and 1 photon</button>
+<button class="reactor" onclick="if(he3 >= 2 && money >= 500) {
+h1 += 2;
+he4 += 1;
+he3 -= 2;
+money -= 500;
+}">2 helium-3 atoms and $500 for 2 protium atoms and 1 helium-4 atom</button>
+<button class="reactor" onclick="if(he3 && he4 && money >= 600) {
+be7 += 1;
+ph += 1;
+he3 -= 1;
+he4 -= 1;
+money -= 600;
+}">1 helium-3 atom, 1 helium-4 atom and $600 for 1 beryllium-7 atom and 1 photon</button>
+<button class="reactor" onclick="if(p && li7 && money >= 100) {
+he4 += 2;
+p -= 1;
+li7 -= 1;
+money -= 100;
+}">1 proton, 1 lithium-7 atom and $100 for 2 helium-4 atoms</button>
 
 <button class="upgrade" onclick="if(p >= 5 && n >= 5 && money >= 50) {
 p -= 5;
@@ -261,19 +280,19 @@ he3 -= 1;
 
 <p>Helium-4 atoms: <span id="he4">0</span></p>
 <button onclick="if(he4) {
-money += 150;
+money += 1000;
 he4 -= 1;
 }">Sell</button>
 
 <p>Beryllium-7 atoms: <span id="be7">0</span></p>
-<button onclick="if(be7) {
+<!--<button onclick="if(be7) {
 money += 30;
 be7 -= 1;
-}">Sell</button>
+}">Sell</button>-->
 
 <p>Lithium-7 atoms: <span id="li7">0</span></p>
 <button onclick="if(li7) {
-money += 75;
+money += 1600;
 li7 -= 1;
 }">Sell</button>
 
@@ -454,7 +473,7 @@ setTimeout(function() {clearInterval(s); c.remove(); object.innerText = text ||o
 <br><br>
 <button onclick="cheat()">Cheat code</button>
 <br><br>
-<button onclick="var text = money + '/' + u + '/' + d + '/' + e + '/' + p + '/' + n + '/' + h1 + '/' + h2 + '/' + he3 + '/' + ph + '/' + pn + '/' + ca + '/' + cu + '/' + ru + '/' + g + '/' + gu + '/' + he4 + '/' + be7 + '/' + li7 + '/' + b8 + '/' + be8 + '/' + c12;
+<button onclick="var text = money + '/' + u + '/' + d + '/' + e + '/' + p + '/' + n + '/' + h1 + '/' + h2 + 	'/' + he3 + '/' + ph + '/' + pn + '/' + ca + '/' + cu + '/' + ru + '/' + g + '/' + gu + '/' + he4 + '/' + be7 + '/' + li7 + '/' + b8 + '/' + be8 + '/' + c12;
 document.querySelector('input').value = btoa(btoa(text));">Export</button>
 <input>
 <br>
